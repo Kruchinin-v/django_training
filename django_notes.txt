@@ -3,3 +3,8 @@ source venv/bin/activate
 pip install django
 django-admin startproject taskmanager
 python manage.py startapp main
+
+#  bootstrap стили
+https://www.bootstrapcdn.com/
+
+# bootstrap шаблоны
