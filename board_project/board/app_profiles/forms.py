@@ -26,5 +26,9 @@ class UserForm(forms.Form):
         last_name = cleaned_data.get('last_name')
         if first_name == 'Иван' and last_name == 'Иванов':
             msg = 'Запрещено регистрироваться, если вы Иван Иванов'
-            self.add_error('first_name', msg)
-            self.add_error('last_name', msg)
+            # обшибка для указанных полей
+            # self.add_error('first_name', msg)
+            # self.add_error('last_name', msg)
+
+            # Общая ошибка
+            raise ValidationError(msg)
