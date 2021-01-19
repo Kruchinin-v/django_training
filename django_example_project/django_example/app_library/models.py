@@ -17,13 +17,28 @@ class Author(models.Model):
     last_name = models.CharField(max_length=40)
     email = models.EmailField()
     biography = models.TextField()
+    second_name = models.CharField(max_length=40, blank=True)
+    phone = models.CharField(max_length=16, blank=True)
+    personal_page = models.URLField(blank=True)
+    facebook = models.URLField(blank=True)
+    twitter = models.URLField(blank=True)
+    city = models.CharField(max_length=50, blank=True)
+    country = models.CharField(max_length=50, blank=True)
+    university = models.CharField(max_length=10, blank=True)
+    birth_date = models.DateField(null=True, blank=True)
 
     def __str__(self):
         return f"{self.id}. {self.first_name} ({self.last_name})"
 
 
 class Book(models.Model):
+    STATUS_CHOICES = [
+        ('d', 'Draft'),
+        ('r', 'Review'),
+        ('w', 'Published'),
+    ]
     title = models.CharField(max_length=100)
     authors = models.ManyToManyField(Author)
     publisher = models.ForeignKey(Publisher, on_delete=models.CASCADE)
     publication_date = models.DateField()
+    status = models.CharField(max_length=1, choices=STATUS_CHOICES, default='d')

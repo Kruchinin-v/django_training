@@ -16,10 +16,38 @@ class PublisherAdmin(admin.ModelAdmin):
 class AuthorAdmin(admin.ModelAdmin):
     list_display = ['id', 'first_name', 'last_name']
     search_fields = ['first_name', 'last_name', 'biography']
+    fieldsets = (
+        ('Основыне сведения', {
+            'fields': ('first_name', 'second_name', 'last_name', 'country', 'city')
+        }),
+        ('Биографические данные', {
+            'fields': ('university', 'birth_date', 'biography'),
+            'description': "Различные данные из бографии автора",
+            'classes': ['collapse']
+        }),
+        ('Контакты', {
+            'fields': ('email', 'phone', 'personal_page', 'facebook', 'twitter'),
+            'description': "Как можно связаться с автором",
+        })
+    )
 
 
 class BookAdmin(admin.ModelAdmin):
-    pass
+    list_display = ['id', 'title', 'status']
+    actions = ['mark_as_published', 'mark_as_draft', 'mark_as_review']
+
+    def mark_as_published(self, request, queryset):
+        queryset.update(status='p')
+
+    def mark_as_draft(self, request, queryset):
+        queryset.update(status='d')
+
+    def mark_as_review(self, request, queryset):
+        queryset.update(status='r')
+
+    mark_as_published.short_description = 'Перевести в статус Опубликовано'
+    mark_as_draft.short_description = 'Перевести в статус Черновик'
+    mark_as_review.short_description = 'Перевести в статус Ревью'
 
 
 admin.site.register(Publisher, PublisherAdmin)
