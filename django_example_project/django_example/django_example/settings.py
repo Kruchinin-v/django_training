@@ -120,3 +120,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
+
+LOGIN_REDIRECT_URL = '/'
+
+# время жизни сессион куки 30 дней
+SESSION_COOKE_AGE = 30 * 24 * 60 * 60
