@@ -16,3 +16,10 @@ https://getbootstrap.com/docs/4.5/examples/
 
 
 
+# для того, чтобы отдавать картинки
+# в settings.py
+MEDIA_ROOT = ps.path.join(BASE_DIR, 'media'
+MEDIA_URL = '/media/
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, dockemunt_root=settings.MEDIA_ROOT
